@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAVEN SYSTEMS — Portfolio</title>
+<meta name="description" content="Portfolio of Raven Systems: Full-Stack Developer building secure, scalable software solutions in Flask, Python, and JavaScript. Security engineer and solution architect.">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+ *        RESET & BASE
+ *     ============================================================ */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	background: #0a0a12;
+	color: #e8e8ed;
+	line-height: 1.6;
+	min-height: 100vh;
+	background-image:
+	radial-gradient(ellipse at 20% 0%, #1a1a2e 0%, transparent 60%),
+	radial-gradient(ellipse at 80% 100%, #1a1a2e 0%, transparent 60%),
+	radial-gradient(ellipse at 50% 50%, #0f0f1a 0%, #0a0a12 100%);
+	background-attachment: fixed;
+}
+
+/* Subtle noise overlay */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+	opacity: 0.3;
+}
+
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 24px 40px 60px;
+	position: relative;
+	z-index: 1;
+}
+
+/* ============================================================
+ *        SCROLLBAR
+ *     ============================================================ */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #0a0a12;
+}
+::-webkit-scrollbar-thumb {
+	background: #FFD700;
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #e6c200;
+}
+
+/* ============================================================
+ *        NAVIGATION
+ *     ============================================================ */
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 0 30px;
+	border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.logo {
+	font-size: 1.6rem;
+	font-weight: 900;
+	letter-spacing: 2px;
+	color: #FFD700;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.logo span {
+	font-weight: 300;
+	color: #666;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+}
+
+.nav-links {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.nav-links a {
+	color: #a0a0b0;
+	text-decoration: none;
+	font-size: 0.9rem;
+	font-weight: 500;
+	padding: 8px 18px;
+	border-radius: 30px;
+	transition: all 0.3s ease;
+	border: 1px solid transparent;
+}
+.nav-links a:hover,
+.nav-links a:focus-visible {
+	color: #FFD700;
+	background: rgba(255, 215, 0, 0.06);
+	border-color: rgba(255, 215, 0, 0.15);
+	outline: 2px solid #FFD700;
+	outline-offset: 2px;
+}
+.nav-links a.cta-nav {
+	background: #FFD700;
+	color: #0a0a12;
+	border-color: #FFD700;
+}
+.nav-links a.cta-nav:hover {
+	background: #e6c200;
+	border-color: #e6c200;
+	color: #0a0a12;
+	transform: scale(1.02);
+}
+
+/* ============================================================
+ *        HERO
+ *     ============================================================ */
+.hero {
+	text-align: center;
+	padding: 80px 20px 50px;
+}
+
+.hero-badge {
+	display: inline-block;
+	background: rgba(255, 215, 0, 0.1);
+	border: 1px solid rgba(255, 215, 0, 0.2);
+	padding: 6px 20px;
+	border-radius: 50px;
+	font-size: 0.75rem;
+	color: #FFD700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+.hero .icon {
+	font-size: 72px;
+	display: block;
+	margin-bottom: 16px;
+	animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-12px); }
+}
+
+.hero h1 {
+	font-size: clamp(2.8rem, 8vw, 5.2rem);
+	font-weight: 900;
+	background: linear-gradient(135deg, #FFD700 0%, #f0c000 40%, #e6b800 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	letter-spacing: 2px;
+	line-height: 1.1;
+}
+
+.hero h1 .highlight {
+	background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.hero p {
+	margin: 24px auto 0;
+	font-size: 1.15rem;
+	color: #9a9aae;
+	max-width: 620px;
+	line-height: 1.8;
+}
+
+.hero-buttons {
+	margin-top: 40px;
+	display: flex;
+	gap: 14px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.btn {
+	display: inline-block;
+	padding: 14px 36px;
+	border-radius: 50px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95rem;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	border: none;
+}
+.btn:focus-visible {
+	outline: 2px solid #FFD700;
+	outline-offset: 4px;
+}
+
+.btn-primary {
+	background: linear-gradient(135deg, #FFD700 0%, #e6c200 100%);
+	color: #0a0a12;
+	box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
+}
+.btn-primary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 35px rgba(255, 215, 0, 0.35);
+}
+
+.btn-secondary {
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 215, 0, 0.25);
+	color: #FFD700;
+}
+.btn-secondary:hover {
+	background: rgba(255, 215, 0, 0.08);
+	border-color: #FFD700;
+	transform: translateY(-3px);
+}
+
+.btn-ghost {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	color: #aaa;
+}
+.btn-ghost:hover {
+	background: rgba(255, 255, 255, 0.06);
+	color: #fff;
+	transform: translateY(-3px);
+}
+
+/* ============================================================
+ *        STATS
+ *     ============================================================ */
+.stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 20px;
+	margin: 60px 0 70px;
+}
+
+.stat {
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	padding: 28px 20px;
+	border-radius: 16px;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+.stat:hover {
+	border-color: rgba(255, 215, 0, 0.2);
+	transform: translateY(-4px);
+}
+
+.stat h2 {
+	font-size: 2.2rem;
+	font-weight: 800;
+	color: #FFD700;
+}
+.stat p {
+	color: #8888a0;
+	font-size: 0.85rem;
+	margin-top: 4px;
+	font-weight: 400;
+}
+
+/* ============================================================
+ *        SECTION TITLE
+ *     ============================================================ */
+.section-title {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 800;
+	margin: 30px 0 14px;
+	color: #fff;
+}
+.section-title .gold {
+	color: #FFD700;
+}
+.section-sub {
+	text-align: center;
+	color: #8888a0;
+	font-size: 1rem;
+	margin-bottom: 45px;
+}
+
+/* ============================================================
+ *        CORE COMPETENCIES (No links needed)
+ *     ============================================================ */
+.competencies-section {
+	margin: 40px 0 60px;
+	padding: 40px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 215, 0, 0.08);
+	border-radius: 20px;
+	backdrop-filter: blur(12px);
+}
+
+.competencies-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 30px;
+	margin-top: 30px;
+}
+
+.competency-category h3 {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #FFD700;
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.competency-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.competency-list li {
+	color: #a0a0b0;
+	font-size: 0.92rem;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.competency-list li::before {
+	content: '▹';
+	color: #FFD700;
+	font-size: 1.2rem;
+}
+
+.competency-list li:last-child {
+	border-bottom: none;
+}
+
+@media (max-width: 600px) {
+	.competencies-section {
+		padding: 24px;
+	}
+	.competencies-grid {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+}
+
+/* ============================================================
+ *        PROJECT GRID
+ *     ============================================================ */
+.projects-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+	gap: 28px;
+}
+
+.project-card {
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 20px;
+	padding: 28px 26px 30px;
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	position: relative;
+	overflow: hidden;
+}
+
+.project-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, #FFD700, transparent);
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.project-card:hover {
+	transform: translateY(-8px);
+	border-color: rgba(255, 215, 0, 0.2);
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+.project-card:hover::before {
+	opacity: 1;
+}
+
+.project-card .card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 12px;
+	gap: 10px;
+}
+
+.project-card h3 {
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: #fff;
+}
+.project-card h3 .accent {
+	color: #FFD700;
+}
+
+/* Status Badges */
+.project-card .card-status {
+	font-size: 0.55rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 4px 12px;
+	border-radius: 50px;
+	font-weight: 600;
+	white-space: nowrap;
+	border: 1px solid;
+	flex-shrink: 0;
+}
+.project-card .card-status.live {
+	background: rgba(0, 255, 100, 0.08);
+	color: #00e676;
+	border-color: rgba(0, 255, 100, 0.15);
+}
+.project-card .card-status.classified {
+	background: rgba(255, 215, 0, 0.08);
+	color: #FFD700;
+	border-color: rgba(255, 215, 0, 0.2);
+	animation: pulse-classified 2.5s ease-in-out infinite;
+}
+.project-card .card-status.dev {
+	background: rgba(0, 212, 255, 0.08);
+	color: #4fc3f7;
+	border-color: rgba(0, 212, 255, 0.15);
+}
+.project-card .card-status.prod {
+	background: rgba(0, 255, 100, 0.08);
+	color: #69f0ae;
+	border-color: rgba(0, 255, 100, 0.15);
+}
+
+@keyframes pulse-classified {
+	0%, 100% { opacity: 0.6; }
+	50% { opacity: 1; }
+}
+
+.project-card p {
+	color: #9a9aae;
+	font-size: 0.92rem;
+	line-height: 1.7;
+	margin: 8px 0 16px;
+}
+
+.project-card .badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 14px 0 18px;
+}
+
+.project-card .badge {
+	display: inline-block;
+	padding: 4px 14px;
+	border-radius: 50px;
+	font-size: 0.7rem;
+	font-weight: 500;
+	background: rgba(255, 215, 0, 0.06);
+	border: 1px solid rgba(255, 215, 0, 0.12);
+	color: #d4b84c;
+	letter-spacing: 0.3px;
+}
+.project-card .badge.blue {
+	background: rgba(0, 212, 255, 0.06);
+	border-color: rgba(0, 212, 255, 0.12);
+	color: #4fc3f7;
+}
+.project-card .badge.green {
+	background: rgba(0, 255, 100, 0.06);
+	border-color: rgba(0, 255, 100, 0.12);
+	color: #69f0ae;
+}
+.project-card .badge.purple {
+	background: rgba(156, 39, 176, 0.08);
+	border-color: rgba(156, 39, 176, 0.15);
+	color: #ce93d8;
+}
+.project-card .badge.red {
+	background: rgba(255, 0, 0, 0.08);
+	border-color: rgba(255, 0, 0, 0.12);
+	color: #ef5350;
+}
+
+.project-card .card-links {
+	display: flex;
+	gap: 18px;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(255, 255, 255, 0.04);
+	flex-wrap: wrap;
+}
+
+.project-card .card-links a {
+	text-decoration: none;
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: #00d4ff;
+	transition: all 0.3s ease;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.project-card .card-links a:hover,
+.project-card .card-links a:focus-visible {
+	color: #FFD700;
+	outline: 2px solid #FFD700;
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+.project-card .card-links a .arrow {
+	transition: transform 0.3s ease;
+}
+.project-card .card-links a:hover .arrow {
+	transform: translateX(4px);
+}
+
+.project-card .card-links .disabled-link {
+	color: #555;
+	cursor: not-allowed;
+	font-size: 0.85rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+/* ============================================================
+ *        ABOUT SECTION
+ *     ============================================================ */
+.about-section {
+	margin: 80px 0 40px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 50px;
+	align-items: center;
+}
+
+.about-section h2 {
+	font-size: 2rem;
+	font-weight: 800;
+	color: #fff;
+	margin-bottom: 16px;
+}
+.about-section h2 .gold {
+	color: #FFD700;
+}
+.about-section p {
+	color: #9a9aae;
+	line-height: 1.8;
+	font-size: 1rem;
+}
+.about-section .tech-stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 20px;
+}
+.about-section .tech-stack .tech-item {
+	padding: 6px 18px;
+	border-radius: 50px;
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	color: #bbb;
+	font-size: 0.8rem;
+	font-weight: 500;
+}
+.about-section .tech-stack .tech-item.gold {
+	border-color: rgba(255, 215, 0, 0.2);
+	color: #FFD700;
+}
+
+.about-section .about-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.about-section .about-image .code-block {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 16px;
+	padding: 30px;
+	width: 100%;
+	font-family: 'Courier New', monospace;
+	font-size: 0.8rem;
+	color: #7a7a8e;
+	line-height: 2;
+}
+.about-section .about-image .code-block .kw {
+	color: #FFD700;
+}
+.about-section .about-image .code-block .str {
+	color: #69f0ae;
+}
+.about-section .about-image .code-block .cmt {
+	color: #555;
+}
+.about-section .about-image .code-block .fn {
+	color: #4fc3f7;
+}
+
+/* ============================================================
+ *        FOOTER
+ *     ============================================================ */
+footer {
+	margin-top: 80px;
+	padding: 40px 0 30px;
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+	text-align: center;
+	color: #666;
+}
+
+footer .footer-links {
+	display: flex;
+	justify-content: center;
+	gap: 24px;
+	flex-wrap: wrap;
+	margin: 16px 0;
+}
+footer .footer-links a {
+	color: #8888a0;
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: color 0.3s ease;
+}
+footer .footer-links a:hover,
+footer .footer-links a:focus-visible {
+	color: #FFD700;
+	outline: 2px solid #FFD700;
+	outline-offset: 4px;
+	border-radius: 4px;
+}
+
+footer .footer-copy {
+	font-size: 0.8rem;
+	color: #555;
+}
+footer .footer-copy .gold {
+	color: #FFD700;
+}
+
+/* ============================================================
+ *        RESPONSIVE
+ *     ============================================================ */
+@media (max-width: 900px) {
+	.container {
+		padding: 20px 24px 40px;
+	}
+	.about-section {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+	.about-section .about-image .code-block {
+		font-size: 0.7rem;
+		padding: 20px;
+	}
+}
+
+@media (max-width: 600px) {
+	nav {
+		flex-direction: column;
+		align-items: stretch;
+		text-align: center;
+		gap: 12px;
+	}
+	.nav-links {
+		justify-content: center;
+	}
+	.hero {
+		padding: 40px 10px 30px;
+	}
+	.hero h1 {
+		font-size: 2.4rem;
+	}
+	.projects-grid {
+		grid-template-columns: 1fr;
+	}
+	.stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.hero-buttons {
+		flex-direction: column;
+		align-items: center;
+	}
+	.btn {
+		width: 100%;
+		max-width: 280px;
+		text-align: center;
+	}
+}
+
+@media (max-width: 400px) {
+	.stats {
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+	.stat {
+		padding: 16px;
+	}
+	.stat h2 {
+		font-size: 1.6rem;
+	}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =========================================================
+NAVIGATION
+========================================================= -->
+<nav>
+<div class="logo">
+🦅 RAVEN <span>· SYSTEMS</span>
+</div>
+<div class="nav-links">
+<a href="#competencies">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#about">About</a>
+<a href="https://github.com/Ravenj-png" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a href="#contact" class="cta-nav">Contact</a>
+</div>
+</nav>
+
+<!-- =========================================================
+HERO
+========================================================= -->
+<section class="hero">
+<span class="hero-badge">✦ Full-Stack · Security · Solution Architect</span>
+<span class="icon" role="img" aria-label="Raven Systems Logo">🦅</span>
+<h1>RAVEN <span class="highlight">SYSTEMS</span></h1>
+<p>
+Building secure, scalable, and intelligent software solutions —
+from school management and e‑commerce to network security and
+enterprise infrastructure. Passionate about architecture,
+automation, and zero-trust systems.
+</p>
+<div class="hero-buttons">
+<a href="#projects" class="btn btn-primary">Explore Systems</a>
+<a href="https://github.com/Ravenj-png" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+<a href="#contact" class="btn btn-ghost">Get in Touch</a>
+</div>
+</section>
+
+<!-- =========================================================
+STATS
+========================================================= -->
+<section class="stats">
+<div class="stat">
+<h2>13</h2>
+<p>Systems Built</p>
+</div>
+<div class="stat">
+<h2>16+</h2>
+<p>Technologies</p>
+</div>
+<div class="stat">
+<h2>6</h2>
+<p>Languages</p>
+</div>
+<div class="stat">
+<h2>100%</h2>
+<p>Open Source</p>
+</div>
+</section>
+
+<!-- =========================================================
+CORE COMPETENCIES (No links required)
+========================================================= -->
+<section class="competencies-section" id="competencies">
+<h2 class="section-title">Technical <span class="gold">Arsenal</span></h2>
+<p class="section-sub">Beyond application development — my expertise spans the full infrastructure and security stack.</p>
+
+<div class="competencies-grid">
+<!-- Category 1: Development -->
+<div class="competency-category">
+<h3>💻 Software Development</h3>
+<ul class="competency-list">
+<li>Full-Stack Web (Flask, Python, JS)</li>
+<li>Custom Language Design (Rune)</li>
+<li>Progressive Web Apps (PWA)</li>
+<li>RESTful APIs & WebSockets</li>
+<li>Database Architecture (SQLite/PostgreSQL)</li>
+</ul>
+</div>
+
+<!-- Category 2: Security & Infrastructure -->
+<div class="competency-category">
+<h3>🛡️ Security & Infrastructure</h3>
+<ul class="competency-list">
+<li>Linux Server Administration</li>
+<li>Reverse Engineering & Binary Analysis</li>
+<li>Network-Layer Bot Protection</li>
+<li>Vulnerability Research & Auditing</li>
+<li>Zero-Trust Architecture</li>
+</ul>
+</div>
+
+<!-- Category 3: AI & Data -->
+<div class="competency-category">
+<h3>🧠 AI & Data Architecture</h3>
+<ul class="competency-list">
+<li>Local-First LLM Deployment</li>
+<li>Data Sovereignty & Privacy</li>
+<li>Behavioral Threat Detection</li>
+<li>SQL Optimization</li>
+<li>AI-Powered Automation</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- =========================================================
+PROJECTS
+========================================================= -->
+<h2 class="section-title" id="projects">Featured <span class="gold">Systems</span></h2>
+<p class="section-sub">Click any demo to try the live application.</p>
+
+<div class="projects-grid" id="projectGrid">
+<!-- Projects injected by JavaScript -->
+</div>
+
+<!-- =========================================================
+ABOUT
+========================================================= -->
+<section class="about-section" id="about">
+<div>
+<h2>About <span class="gold">Raven Systems</span></h2>
+<p>
+I'm a self‑taught full‑stack developer and security enthusiast
+passionate about building secure, production‑ready applications.
+My work spans education, e‑commerce, security, and enterprise
+infrastructure — always with a focus on clean architecture and
+real‑world deployment.
+</p>
+<p style="margin-top: 12px;">
+I write code in <strong style="color:#fff;">Python</strong>,
+<strong style="color:#fff;">JavaScript</strong>,
+<strong style="color:#fff;">C</strong>,
+<strong style="color:#fff;">C++</strong>, and my own
+<strong style="color:#FFD700;">Rune</strong> language.
+All projects are open‑source and hosted live.
+</p>
+<div class="tech-stack">
+<span class="tech-item gold">Flask</span>
+<span class="tech-item gold">SQLite / PostgreSQL</span>
+<span class="tech-item">JWT</span>
+<span class="tech-item">Argon2id</span>
+<span class="tech-item">OpenAI</span>
+<span class="tech-item">WebSockets</span>
+<span class="tech-item">PWA</span>
+<span class="tech-item">Network Security</span>
+</div>
+</div>
+<div class="about-image">
+<div class="code-block">
+<span class="cmt"># Raven Systems · ethos</span><br>
+<span class="kw">class</span> <span class="fn">Developer</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">build</span>(<span class="kw">self</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">while</span> <span class="kw">True</span>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write(<span class="str">"secure code"</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deploy()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;learn()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">break</span>  <span class="cmt"># never</span>
+</div>
+</div>
+</section>
+
+<!-- =========================================================
+FOOTER
+========================================================= -->
+<footer id="contact">
+<div class="footer-links">
+<a href="https://github.com/Ravenj-png" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a href="mailto:jovanraven9@gmail.com">Email</a>
+<a href="https://webraven9-j.onrender.com" target="_blank" rel="noopener noreferrer">Render Deployments</a>
+<a href="https://ravenj-png.github.io/Raven-21--system/templates/index.html" target="_blank" rel="noopener noreferrer">Live Demos</a>
+</div>
+<div class="footer-copy">
+© 2026 <span class="gold">RAVEN SYSTEMS</span> — Built with Flask &amp; purpose.
+</div>
+</footer>
+
+</div>
+
+<!-- =========================================================
+JAVASCRIPT — Project Data & Injection
+========================================================= -->
+<script>
+// ─── PROJECT DATA ──────────────────────────────────────────────
+const projects = [{
+	name: 'Raven Fortress',
+	desc: 'AI-powered security auditing platform with real-time system monitoring, vulnerability scanning, and OpenAI-assisted analysis.',
+	tech: ['Flask', 'SQLite', 'JWT', 'OpenAI', 'psutil'],
+	badges: ['gold', 'blue', 'gold', 'purple', 'blue'],
+	live: 'https://ravenj-png.github.io/raven-security-test/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-security-test',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'WebRaven',
+	desc: 'Full-stack online voting system with secure authentication, election management, real-time counting, and admin controls.',
+	tech: ['Flask', 'SQLite', 'JavaScript', 'Rune'],
+	badges: ['gold', 'blue', 'green', 'gold'],
+	live: 'https://webraven9-j.onrender.com',
+	repo: 'https://github.com/Ravenj-png/webraven9--j',
+	status: 'Live API',
+	statusClass: 'live'
+}, {
+	name: 'Raven POS',
+	desc: 'Point-of-Sale platform for supermarkets — inventory, sales, customer management, and low-stock alerts (static demo).',
+	tech: ['HTML', 'CSS', 'JavaScript', 'localStorage'],
+	badges: ['green', 'green', 'green', 'blue'],
+	live: 'https://ravenj-png.github.io/raven-pos_system9/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-pos_system9',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Terazzo',
+	desc: 'WAMP Enterprise Dashboard — agent and client management with real-time chat monitoring and broadcast capabilities.',
+	tech: ['Flask', 'JS', 'SQLite', 'Socket.IO'],
+	badges: ['gold', 'green', 'blue', 'purple'],
+	live: 'https://ravenj-png.github.io/raven-terazzo/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-terazzo',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Attend',
+	desc: 'Student attendance system with term-based registration, class/subject management, and comprehensive reporting.',
+	tech: ['Flask', 'SQLite', 'PWA', 'JavaScript'],
+	badges: ['gold', 'blue', 'purple', 'green'],
+	live: 'https://ravenj-png.github.io/Raven-attend/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/Raven-attend',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Air',
+	desc: 'Corporate website for Air System Coolers Ltd — HVAC, fire protection, and power systems with live weather dashboard.',
+	tech: ['Flask', 'JavaScript', 'OpenWeatherMap'],
+	badges: ['gold', 'green', 'blue'],
+	live: 'https://ravenj-png.github.io/raven-air/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-air',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Beauty',
+	desc: 'E-commerce perfume store with cart, order processing, and mobile money integration (MTN / Airtel).',
+	tech: ['Flask', 'SQLite', 'JavaScript', 'Mobile Money'],
+	badges: ['gold', 'blue', 'green', 'gold'],
+	live: 'https://ravenj-png.github.io/Raven-beauty/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/Raven-beauty',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven 21',
+	desc: 'Full-stack school management system — students, teachers, marks, reports, announcements, and role-based access.',
+	tech: ['Flask', 'SQLite', 'JWT', 'JavaScript'],
+	badges: ['gold', 'blue', 'purple', 'green'],
+	live: 'https://ravenj-png.github.io/Raven-21--system/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/Raven-21--system',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Tech',
+	desc: 'SchoolHub — complete system with Argon2id password hashing, rate limiting, and advanced admin controls.',
+	tech: ['Flask', 'SQLite', 'Argon2id', 'Flask-Limiter'],
+	badges: ['gold', 'blue', 'gold', 'purple'],
+	live: 'https://ravenj-png.github.io/raven-tech-system/templates/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-tech-system',
+	status: 'Live Demo',
+	statusClass: 'live'
+}, {
+	name: 'Raven Internet',
+	desc: 'Progressive Web App (PWA) internet tool — offline-ready, installable, and built for mobile use.',
+	tech: ['PWA', 'JavaScript', 'Service Worker', 'HTML/CSS'],
+	badges: ['purple', 'green', 'blue', 'green'],
+	live: 'https://ravenj-png.github.io/raven-internet/pwa/index.html',
+	repo: 'https://github.com/Ravenj-png/raven-internet',
+	status: 'Live PWA',
+	statusClass: 'live'
+}, {
+	name: '🛡️ Raven Shield — Bot Protection',
+	desc: 'Network-layer bot protection system operating at the LAN level. Real-time traffic analysis, behavioral detection, IP flagging, TOR exit node blocking, and adaptive rate limiting.',
+	tech: ['Network Layer', 'Traffic Analysis', 'Behavioral AI', 'Rate Limiting'],
+	badges: ['gold', 'purple', 'blue', 'gold'],
+	live: '#',
+	repo: '#',
+	status: '✅ Production Ready',
+	statusClass: 'prod'
+}, {
+	name: '🧠 Raven AI — Local-First Engine',
+	desc: 'Custom AI inference system deployed entirely on local/LAN infrastructure. Zero data leakage, no external API dependencies, strict data sovereignty, and local HTTPS enforcement.',
+	tech: ['Local LLM', 'Zero-Trust', 'LAN Deployment', 'Python'],
+	badges: ['gold', 'blue', 'purple', 'green'],
+	live: '#',
+	repo: '#',
+	status: '🚧 Development',
+	statusClass: 'dev'
+}, {
+	name: '🔄 Raven Shield — Application Layer',
+	desc: 'Extending bot protection to the application layer. WAF integration, OWASP Top 10 protection, advanced session validation, and AI-powered attack detection.',
+	tech: ['WAF', 'OWASP', 'AI Detection', 'Application Security'],
+	badges: ['gold', 'purple', 'blue', 'gold'],
+	live: '#',
+	repo: '#',
+	status: '🚧 In Development',
+	statusClass: 'dev'
+}];
+
+// ─── BADGE CLASS MAP ──────────────────────────────────────────
+const badgeClassMap = {
+	'gold': 'badge',
+	'blue': 'badge blue',
+	'green': 'badge green',
+	'purple': 'badge purple',
+	'red': 'badge red'
+};
+
+// ─── RENDER PROJECTS ──────────────────────────────────────────
+const grid = document.getElementById('projectGrid');
+
+projects.forEach((p) => {
+	const card = document.createElement('div');
+	card.className = 'project-card';
+	
+	// Build badges HTML
+	const badgesHTML = p.tech.map((t, i) => {
+		const cls = badgeClassMap[p.badges[i]] || 'badge';
+		return `<span class="${cls}">${t}</span>`;
+	}).join('');
+	
+	// Determine if links should be disabled (for local/LAN systems)
+	const isLocal = p.live === '#' && p.repo === '#';
+	const liveLink = isLocal ?
+	`<span class="disabled-link">🔒 Internal Only</span>` :
+	`<a href="${p.live}" target="_blank" rel="noopener noreferrer">🌐 Live Demo <span class="arrow">→</span></a>`;
+	const repoLink = isLocal ?
+	`<span class="disabled-link">🔒 Private Repo</span>` :
+	`<a href="${p.repo}" target="_blank" rel="noopener noreferrer">📂 GitHub <span class="arrow">→</span></a>`;
+	
+	card.innerHTML = `
+	<div class="card-header">
+	<h3><span class="accent">⟡</span> ${p.name}</h3>
+	<span class="card-status ${p.statusClass}">${p.status}</span>
+	</div>
+	<p>${p.desc}</p>
+	<div class="badges">${badgesHTML}</div>
+	<div class="card-links">
+	${liveLink}
+	${repoLink}
+	</div>
+	`;
+	
+	grid.appendChild(card);
+});
+
+// ─── SMOOTH SCROLL FOR NAV LINKS ─────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+	anchor.addEventListener('click', function(e) {
+		const target = document.querySelector(this.getAttribute('href'));
+		if (target) {
+			e.preventDefault();
+			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	});
+});
+
+console.log('🦅 RAVEN SYSTEMS · 13 projects loaded');
+</script>
+
+</body>
+</html>
