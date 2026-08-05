@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAVEN SYSTEMS — Portfolio</title>
-<meta name="description" content="Portfolio of Raven Systems: Full-Stack Developer building secure, scalable software solutions in Flask, Python, and JavaScript. Security engineer and solution architect.">
+<title>RSSA – RAVEN Software & Systems Architecture</title>
+<meta name="description" content="RSSA – RAVEN Software & Systems Architecture. Full-Stack Developer building secure, scalable software solutions in Flask, Python, and JavaScript. Security engineer and solution architect.">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -191,6 +191,17 @@ nav {
 	background-clip: text;
 }
 
+.hero h1 .rssa-tag {
+	font-size: 0.25em;
+	display: block;
+	color: #FFD700;
+	background: none;
+	-webkit-text-fill-color: #FFD700;
+	letter-spacing: 6px;
+	font-weight: 400;
+	margin-top: 4px;
+}
+
 .hero p {
 	margin: 24px auto 0;
 	font-size: 1.15rem;
@@ -325,7 +336,7 @@ nav {
 
 .competencies-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 	gap: 30px;
 	margin-top: 30px;
 }
@@ -674,6 +685,10 @@ footer .footer-copy {
 footer .footer-copy .gold {
 	color: #FFD700;
 }
+footer .footer-copy .rssa {
+	color: #FFD700;
+	font-weight: 600;
+}
 
 /* ============================================================
  *        RESPONSIVE
@@ -749,7 +764,7 @@ NAVIGATION
 ========================================================= -->
 <nav>
 <div class="logo">
-🦅 RAVEN <span>· SYSTEMS</span>
+🦅 RSSA <span>· SYSTEMS</span>
 </div>
 <div class="nav-links">
 <a href="#competencies">Skills</a>
@@ -765,8 +780,12 @@ HERO
 ========================================================= -->
 <section class="hero">
 <span class="hero-badge">✦ Full-Stack · Security · Solution Architect</span>
-<span class="icon" role="img" aria-label="Raven Systems Logo">🦅</span>
-<h1>RAVEN <span class="highlight">SYSTEMS</span></h1>
+<span class="icon" role="img" aria-label="RSSA Logo">🦅</span>
+<h1>
+RSSA
+<span class="highlight">SYSTEMS</span>
+<span class="rssa-tag">RAVEN SOFTWARE &amp; SYSTEMS ARCHITECTURE</span>
+</h1>
 <p>
 Building secure, scalable, and intelligent software solutions —
 from school management and e‑commerce to network security and
@@ -781,7 +800,7 @@ automation, and zero-trust systems.
 </section>
 
 <!-- =========================================================
-STATS
+STATS (Original)
 ========================================================= -->
 <section class="stats">
 <div class="stat">
@@ -803,7 +822,7 @@ STATS
 </section>
 
 <!-- =========================================================
-CORE COMPETENCIES (No links required)
+CORE COMPETENCIES (ALL 3 Categories with Cloud/DevOps added)
 ========================================================= -->
 <section class="competencies-section" id="competencies">
 <h2 class="section-title">Technical <span class="gold">Arsenal</span></h2>
@@ -819,10 +838,11 @@ CORE COMPETENCIES (No links required)
 <li>Progressive Web Apps (PWA)</li>
 <li>RESTful APIs & WebSockets</li>
 <li>Database Architecture (SQLite/PostgreSQL)</li>
+<li>Microservices Architecture</li>
 </ul>
 </div>
 
-<!-- Category 2: Security & Infrastructure -->
+<!-- Category 2: Security & Infrastructure (UPDATED with Cloud/DevOps) -->
 <div class="competency-category">
 <h3>🛡️ Security & Infrastructure</h3>
 <ul class="competency-list">
@@ -831,10 +851,11 @@ CORE COMPETENCIES (No links required)
 <li>Network-Layer Bot Protection</li>
 <li>Vulnerability Research & Auditing</li>
 <li>Zero-Trust Architecture</li>
+<li><strong style="color:#FFD700;">☁️ Cloud & DevOps:</strong> Kubernetes, Docker/Podman, AWS/GCP/Azure, Terraform, CI/CD, Nginx, Prometheus/Grafana</li>
 </ul>
 </div>
 
-<!-- Category 3: AI & Data -->
+<!-- Category 3: AI & Data (Original) -->
 <div class="competency-category">
 <h3>🧠 AI & Data Architecture</h3>
 <ul class="competency-list">
@@ -859,23 +880,23 @@ PROJECTS
 </div>
 
 <!-- =========================================================
-ABOUT
+ABOUT (Original with RSSA branding)
 ========================================================= -->
 <section class="about-section" id="about">
 <div>
-<h2>About <span class="gold">Raven Systems</span></h2>
+<h2>About <span class="gold">RSSA</span></h2>
 <p>
-I'm a self‑taught full‑stack developer and security enthusiast
-passionate about building secure, production‑ready applications.
-My work spans education, e‑commerce, security, and enterprise
-infrastructure — always with a focus on clean architecture and
-real‑world deployment.
+<strong>RSSA (RAVEN Software & Systems Architecture)</strong> is a
+software and systems architecture practice focused on building
+secure, production‑ready applications. Our work spans education,
+e‑commerce, security, and enterprise infrastructure — always with a
+focus on clean architecture and real‑world deployment.
 </p>
 <p style="margin-top: 12px;">
-I write code in <strong style="color:#fff;">Python</strong>,
+We write code in <strong style="color:#fff;">Python</strong>,
 <strong style="color:#fff;">JavaScript</strong>,
 <strong style="color:#fff;">C</strong>,
-<strong style="color:#fff;">C++</strong>, and my own
+<strong style="color:#fff;">C++</strong>, and our own
 <strong style="color:#FFD700;">Rune</strong> language.
 All projects are open‑source and hosted live.
 </p>
@@ -888,12 +909,14 @@ All projects are open‑source and hosted live.
 <span class="tech-item">WebSockets</span>
 <span class="tech-item">PWA</span>
 <span class="tech-item">Network Security</span>
+<span class="tech-item gold">Kubernetes</span>
+<span class="tech-item gold">Terraform</span>
 </div>
 </div>
 <div class="about-image">
 <div class="code-block">
-<span class="cmt"># Raven Systems · ethos</span><br>
-<span class="kw">class</span> <span class="fn">Developer</span>:<br>
+<span class="cmt"># RSSA · ethos</span><br>
+<span class="kw">class</span> <span class="fn">Architect</span>:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">build</span>(<span class="kw">self</span>):<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">while</span> <span class="kw">True</span>:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write(<span class="str">"secure code"</span>)<br>
@@ -915,7 +938,7 @@ FOOTER
 <a href="https://ravenj-png.github.io/Raven-21--system/templates/index.html" target="_blank" rel="noopener noreferrer">Live Demos</a>
 </div>
 <div class="footer-copy">
-© 2026 <span class="gold">RAVEN SYSTEMS</span> — Built with Flask &amp; purpose.
+© 2026 <span class="rssa">RSSA</span> — RAVEN Software &amp; Systems Architecture
 </div>
 </footer>
 
@@ -1103,7 +1126,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 	});
 });
 
-console.log('🦅 RAVEN SYSTEMS · 13 projects loaded');
+console.log('🦅 RSSA — RAVEN Software & Systems Architecture · 13 projects loaded');
 </script>
 
 </body>
