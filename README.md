@@ -1,6 +1,39 @@
-# 🦅 RAVEN SYSTEMS — Official Portfolio
+<p align="center">
+  <pre style="color: #00ff41; font-family: 'Courier New', monospace; background-color: #0a0a0a; padding: 20px; border-radius: 8px; border: 1px solid #00ff41; line-height: 1.4;">
+====================================================================
+   ____       _    _ _____ _   _   ____ ____    _    
+  |  _ \     / \  | | ____| \ | | / ___/ ___|  / \   
+  | |_) |   / _ \ | |  _| |  \| | \___ \___ \ / _ \  
+  |  _ <   / ___ \| | |___| |\  |  ___) |__) / ___ \ 
+  |_| \_\ /_/   \_\_\_____|_| \_| |____/____/_/   \_\
+                                                     
+         [ SOFTWARE & SYSTEMS ARCHITECTURE ]
+====================================================================
+ :: Architecture : Zero-Trust / Post-Quantum / Microservices
+ :: Core Status  : SECURED & DEPLOYED // PRODUCTION READY
+ :: Founded      : 2026 // Kampala, Uganda
+====================================================================
+  </pre>
+</p>
 
-Welcome to the official source code for the **Raven Systems** portfolio website. This is a high-performance, security-focused, single-page application showcasing enterprise-grade systems, local-first AI architecture, and full-stack development capabilities.
+<br>
+
+# 🦅 RSSA – RAVEN Software & Systems Architecture
+
+**Enterprise Software Architecture & Secure Systems Engineering**
+
+Welcome to the official source code for the **RSSA (RAVEN Software & Systems Architecture)** portfolio website. This is a high-performance, security-focused, single-page application showcasing enterprise-grade systems, local-first AI architecture, and full-stack development capabilities.
+
+---
+
+## 📊 Project Stats
+
+| Metric | Value |
+|--------|-------|
+| Enterprise Systems Deployed | **5+** |
+| Total Systems Built | **19+** |
+| Security-Focused Architectures | **100%** |
+| Automated System Monitoring | **24/7** |
 
 ---
 
@@ -18,29 +51,41 @@ Welcome to the official source code for the **Raven Systems** portfolio website.
 
 ## 📂 Projects Showcased
 
-| # | Project | Type |
-|---|---------|------|
-| 1 | Raven Fortress | Security Audit Platform |
-| 2 | WebRaven | Online Voting System |
-| 3 | Raven POS | Point of Sale (Static Demo) |
-| 4 | Raven Terazzo | WAMP Enterprise Dashboard |
-| 5 | Raven Attend | Attendance Management System |
-| 6 | Raven Air | Corporate Website (Air System Coolers) |
-| 7 | Raven Beauty | E-commerce Perfume Store |
-| 8 | Raven 21 | School Management System |
-| 9 | Raven Tech | SchoolHub (Complete System) |
-| 10 | Raven Internet | PWA Internet Tool |
-| 11 | 🛡️ Raven Shield — Bot Protection | Network-Layer Security (Internal) |
-| 12 | 🧠 Raven AI — Local-First Engine | Local LLM Deployment (Internal) |
-| 13 | 🔄 Raven Shield — Application Layer | WAF/OWASP Protection (In Development) |
+| # | Project | Type | Status |
+|---|---------|------|--------|
+| 1 | **SecureUSSD Gateway** | Fintech / Microservices | ✅ Deployed |
+| 2 | **FinSecure Vault API** | Fintech / Security | 🔄 In Development |
+| 3 | **ZeroTrust Mesh** | Infrastructure / Security | 🔄 In Development |
+| 4 | **CipherVault DMS** | Security / Document Management | 🔄 In Development |
+| 5 | **QuantumArchive** | Security / Cryptography | 🔄 In Development |
+| 6 | **ThreatSentinel AI** | Security / AI | ✅ Deployed |
+| 7 | Raven Fortress | Security Audit Platform | 📦 Archived |
+| 8 | WebRaven | Online Voting System | 📦 Archived |
+| 9 | Raven POS | Point of Sale (Static Demo) | 📦 Archived |
+| 10 | Raven Terazzo | WAMP Enterprise Dashboard | 📦 Archived |
+| 11 | Raven Attend | Attendance Management System | 📦 Archived |
+| 12 | Raven Air | Corporate Website | 📦 Archived |
+| 13 | Raven Beauty | E-commerce Perfume Store | 📦 Archived |
+| 14 | Raven 21 | School Management System | 📦 Archived |
+| 15 | Raven Tech | SchoolHub (Complete System) | 📦 Archived |
+| 16 | Raven Internet | PWA Internet Tool | 📦 Archived |
+| 17 | 🛡️ Raven Shield — Bot Protection | Network-Layer Security | 🔒 Internal Only |
+| 18 | 🧠 Raven AI — Local-First Engine | Local LLM Deployment | 🔒 Internal Only |
+| 19 | 🔄 Raven Shield — Application Layer | WAF/OWASP Protection | 🔄 In Development |
 
 ---
 
-## 🚀 How to Run
+## 🛠️ Built With
 
-Since this is a static site, you don't need a backend or build tools:
+### Frontend
+- **HTML5** – Semantic structure
+- **CSS3** – Custom properties, Flexbox, Grid, animations
+- **Vanilla JavaScript** – Intersection Observer, smooth scrolling, form handling
+- **Google Fonts** – Inter & JetBrains Mono
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/Ravenj-png/Raven-Portfolio.git
-   cd Raven-Portfolio
+### Deployment
+- **GitHub Pages** – Static hosting with HTTPS
+
+---
+
+## 📁 Project Structure
