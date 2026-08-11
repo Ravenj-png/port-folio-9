@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSSA - MTN MoMo USSD Simulator</title>
+<style>
+  body{background:#121212;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;font-family:'Courier New',Courier,monospace;}
+  .phone{background:#000;color:#fff;width:340px;height:640px;border:3px solid #444;border-radius:24px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.8);}
+  .topbar{display:flex;justify-content:space-between;padding:8px 15px;font-size:.75em;color:#888;border-bottom:1px solid #222;}
+  .net{font-weight:bold;}
+  .net.on{color:#0f0;} .net.off{color:#f00;}
+  .head{background:#ffcc00;color:#000;padding:10px;text-align:center;font-weight:bold;letter-spacing:1px;}
+  .code{background:#1a1a1a;color:#ffcc00;text-align:center;font-size:.8em;padding:4px;border-bottom:1px solid #333;}
+  .screen{flex:1;padding:18px;font-size:.95em;line-height:1.6;white-space:pre-line;overflow-y:auto;}
+  .controls{padding:12px;border-top:1px solid #333;}
+  input{width:100%;padding:10px;background:#1a1a1a;border:1px solid #444;color:#fff;font-family:inherit;font-size:1em;box-sizing:border-box;margin-bottom:8px;}
+  .row{display:flex;gap:8px;}
+  button{flex:1;padding:12px;background:#ffcc00;color:#000;border:none;font-weight:bold;font-family:inherit;font-size:1em;cursor:pointer;}
+  button.gray{background:#333;color:#ccc;}
+  button:disabled{background:#222;color:#555;cursor:not-allowed;}
+  .foot{background:#111;color:#666;padding:8px;text-align:center;font-size:.7em;border-top:1px solid #333;}
+  .hidden{display:none;}
+  .y{color:#ffcc00;} .g{color:#0f0;} .r{color:#ff4444;} .d{color:#888;}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar"><span>MTN UG</span><span id="net" class="net on">4G LTE</span><span>100%</span></div>
+  <div class="head">MTN MoMo</div>
+  <div class="code" id="code">*165#</div>
+  <div class="screen" id="screen"></div>
+  <div class="controls">
+    <input id="inp" class="hidden" type="tel" placeholder="Enter option / value">
+    <div class="row" id="rowSend">
+      <button id="btnSend" class="hidden">SEND</button>
+      <button id="btnCancel" class="gray hidden">CANCEL</button>
+    </div>
+    <button id="btnDial" class="hidden">DIAL *165#</button>
+    <button id="btnReturn" class="hidden">SIMULATE NETWORK RETURN</button>
+  </div>
+  <div class="foot">RSSA - Raven Software &amp; Systems Architecture</div>
+</div>
+
+<script>
+var balance = 1000000;
+var state = 'home';
+var tx = {dest:'', amount:0, fee:0, net:'MTN'};
+var scr=document.getElementById('screen'), inp=document.getElementById('inp'),
+    btnSend=document.getElementById('btnSend'), btnCancel=document.getElementById('btnCancel'),
+    btnDial=document.getElementById('btnDial'), btnReturn=document.getElementById('btnReturn'),
+    net=document.getElementById('net'), code=document.getElementById('code');
+
+function fmt(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function feeFor(a){ if(a<=2500)return 250; if(a<=5000)return 500; if(a<=10000)return 750; if(a<=25000)return 1000; return 2000; }
+
+function ui(mode){
+  inp.className = (mode==='input') ? '' : 'hidden';
+  btnSend.className = (mode==='input') ? '' : 'hidden';
+  btnCancel.className = (mode==='input') ? '' : 'hidden';
+  btnDial.className = (mode==='dial') ? '' : 'hidden';
+  btnReturn.className = (mode==='return') ? '' : 'hidden';
+  inp.disabled=false; btnSend.disabled=false; btnCancel.disabled=false;
+  if(mode==='input'){ inp.value=''; inp.focus(); }
+}
+
+function render(){
+  switch(state){
+    case 'home':
+      code.textContent='*165#';
+      scr.innerHTML='Welcome to MTN MoMo.\n\n<span class="y">Available Balance: '+fmt(balance)+' UGX</span>\n\nRSSA UX Simulation Environment.\nOffline Resilience Layer Demo.\n\nDial *165# to begin.';
+      ui('dial'); break;
+
+    case 'main':
+      code.textContent='*165#';
+      scr.innerHTML='MTN MoMo\n1. Send Money\n2. Withdraw Cash\n3. Pay Bill\n4. Buy Airtime\n5. My Account\n6. Financial Services\n\n<span class="y">Reply with option:</span>';
+      inp.type='tel'; ui('input'); break;
+
+    case 'sendmenu':
+      code.textContent='*165*1#';
+      scr.innerHTML='Send Money\n1. To MTN\n2. To Other Networks\n3. To Bank\n0. Back\n\n<span class="y">Reply with option:</span>';
+      inp.type='tel'; ui('input'); break;
+
+    case 'number':
+      code.textContent='*165*1#';
+      scr.innerHTML='Send Money ('+tx.net+')\n\nEnter recipient phone number:';
+      inp.type='tel'; inp.placeholder='07XXXXXXXX'; ui('input'); break;
+
+    case 'amount':
+      code.textContent='*165*1#';
+      scr.innerHTML='Send Money\nTo: '+tx.dest+'\n\nEnter amount (UGX):';
+      inp.type='number'; inp.placeholder='e.g. 5000'; ui('input'); break;
+
+    case 'confirm':
+      code.textContent='*165*1#';
+      scr.innerHTML='Send Money\nTo: '+tx.dest+' ('+tx.net+')\nAmount: '+fmt(tx.amount)+' UGX\nFee: '+fmt(tx.fee)+' UGX\n<span class="y">Total: '+fmt(tx.amount+tx.fee)+' UGX</span>\n\n1. Confirm\n0. Cancel';
+      inp.type='tel'; ui('input'); break;
+
+    case 'pin':
+      code.textContent='*165*1#';
+      scr.innerHTML='Enter MoMo PIN to authorise\n'+fmt(tx.amount+tx.fee)+' UGX:\n\n<span class="d">(Demo PIN is 1234)</span>';
+      inp.type='password'; inp.placeholder='****'; ui('input'); break;
+
+    case 'offline':
+      code.textContent='*165*1#';
+      net.textContent='NO SERVICE'; net.className='net off';
+      scr.innerHTML='<span class="r">NETWORK ERROR</span>\nUSSD session timed out.\n\n<span class="y">RSSA Layer intercepting...</span>\nTransaction state tokenized and encrypted.\nSaved to local client cache (RSSA app layer).\n\n<span class="d">Standard flow: customer is stuck.\nRSSA flow: transaction state is protected.</span>';
+      ui('return'); break;
+
+    case 'sync':
+      code.textContent='*165*1#';
+      net.textContent='2G'; net.className='net on';
+      scr.innerHTML='Network restored (2G).\n\nPrimary channel: lightweight app auto-resubmission...\nFallback channel: encrypted payload via secure SMS transport to MTN SMSC gateway...\n\n<span class="d">RSSA Edge Gateway validating nonce and SIM metadata...</span>';
+      ui('none');
+      setTimeout(function(){
+        balance -= (tx.amount + tx.fee);
+        state='success'; render();
+      }, 2600);
+      break;
+
+    case 'success':
+      code.textContent='*165#';
+      net.textContent='4G LTE'; net.className='net on';
+      scr.innerHTML='<span class="g">TXN SUCCESSFUL</span>\nSent: '+fmt(tx.amount)+' UGX\nTo: '+tx.dest+'\nFee: '+fmt(tx.fee)+' UGX\nRef: M'+Date.now().toString().slice(-8)+'\n\n<span class="y">New Balance: '+fmt(balance)+' UGX</span>\n\n<span class="d">Resolved asynchronously via RSSA Edge Resilience Layer.\nUX Simulation Environment.</span>\n\n1. Main Menu\n0. End';
+      inp.type='tel'; ui('input'); break;
+
+    case 'account':
+      code.textContent='*165*5#';
+      scr.innerHTML='My Account\n1. Check Balance\n2. Mini Statement\n3. Change PIN\n0. Back\n\n<span class="y">Reply with option:</span>';
+      inp.type='tel'; ui('input'); break;
+
+    case 'balance':
+      code.textContent='*165*5*1#';
+      scr.innerHTML='Available Balance:\n<span class="y">'+fmt(balance)+' UGX</span>\n\n0. Back';
+      inp.type='tel'; ui('input'); break;
+
+    case 'soon':
+      scr.innerHTML='<span class="d">This demo covers Send Money and My Account.</span>\n\n0. Back';
+      inp.type='tel'; ui('input'); break;
+
+    case 'end':
+      code.textContent='*165#';
+      scr.innerHTML='Session ended.\n\n<span class="d">Thank you for using MTN MoMo\npowered by the RSSA Resilience Layer.</span>';
+      ui('dial'); break;
+  }
+}
+
+btnDial.onclick=function(){ state='main'; render(); };
+btnReturn.onclick=function(){ state='sync'; render(); };
+btnCancel.onclick=function(){ state='end'; render(); };
+
+btnSend.onclick=function(){
+  var v=inp.value.trim();
+  if(!v) return;
+  if(state==='main'){
+    if(v==='1'){state='sendmenu';}
+    else if(v==='5'){state='account';}
+    else if(v==='2'||v==='3'||v==='4'||v==='6'){state='soon';}
+    render();
+  }
+  else if(state==='sendmenu'){
+    if(v==='1'){tx.net='MTN';state='number';}
+    else if(v==='2'){tx.net='Other Network';state='number';}
+    else if(v==='3'){tx.net='Bank';state='number';}
+    else if(v==='0'){state='main';}
+    render();
+  }
+  else if(state==='number'){
+    if(/^07\d{8}$/.test(v)){ tx.dest=v; state='amount'; render(); }
+    else { scr.innerHTML='Send Money\n\n<span class="r">Invalid number. Use format 07XXXXXXXX.</span>\n\nEnter recipient phone number:'; inp.value=''; }
+  }
+  else if(state==='amount'){
+    var a=parseInt(v,10);
+    var f=feeFor(a);
+    if(a>0 && (a + f) <= balance){ tx.amount=a; tx.fee=f; state='confirm'; render(); }
+    else { scr.innerHTML='Send Money\n\n<span class="r">Invalid or insufficient amount.</span>\n\nEnter amount (UGX):'; inp.value=''; }
+  }
+  else if(state==='confirm'){
+    if(v==='1'){ state='pin'; render(); }
+    else if(v==='0'){ state='main'; render(); }
+  }
+  else if(state==='pin'){
+    if(v === '1234'){
+      state='offline';
+      render();
+    } else {
+      scr.innerHTML='Enter MoMo PIN to authorise\n'+fmt(tx.amount+tx.fee)+' UGX:\n\n<span class="r">Wrong PIN. Try again.</span>\n\n<span class="d">(Demo PIN is 1234)</span>';
+      inp.value='';
+    }
+  }
+  else if(state==='account'){
+    if(v==='1'){state='balance';}
+    else if(v==='0'){state='main';}
+    else {state='soon';}
+    render();
+  }
+  else if(state==='balance'){
+    if(v==='0'){state='main';}
+    render();
+  }
+  else if(state==='soon'){
+    if(v==='0'){state='main';}
+    render();
+  }
+  else if(state==='success'){
+    if(v==='1'){state='main';}
+    else if(v==='0'){state='end';}
+    render();
+  }
+  inp.value='';
+};
+
+render();
+</script>
+</body>
+</html>
